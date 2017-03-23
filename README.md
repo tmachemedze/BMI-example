@@ -12,12 +12,12 @@ We have the following variables:
 `w1_a_n2_1`	- "Weight measure one"
 
 
-#import the data
+# import the data
 ```{r}
 nids<-read.csv("./data/nids.csv")
 ```
 
-##Exploration
+## Exploration
 
 ```{r}
 head(nids, n = 10L)
