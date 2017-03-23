@@ -13,9 +13,16 @@ We have the following variables:
 
 
 #import the data
+```{r}
 nids<-read.csv("./data/nids.csv")
+```
 
 ##Exploration
 
+```{r}
 head(nids, n = 10L)
+```
+
+```{r}
 tail(nids, n = 10L)
+```
