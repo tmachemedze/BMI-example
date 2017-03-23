@@ -15,19 +15,3 @@ We have the following variables:
 `w1_a_n1_1`	- "Height measure one"
 
 `w1_a_n2_1`	- "Weight measure one"
-
-
-# import the data
-```{r}
-nids<-read.csv("./data/nids.csv")
-```
-
-## Exploration
-
-```{r}
-head(nids, n = 10L)
-```
-
-```{r}
-tail(nids, n = 10L)
-```
