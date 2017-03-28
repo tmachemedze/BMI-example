@@ -3,9 +3,9 @@ title: "The BMI example"
 author: "Takwanisa Machemedze"
 date: "24 March 2017"
 output:
+  pdf_document: default
   md_document: default
   html_document: default
-  pdf_document: default
 ---
 
 **Note:** *This exercise is part of re-writing the [SALDRU Stata course](http://www.saldru.uct.ac.za/courses/) in R for [DataFirst](https://www.datafirst.uct.ac.za/).Therefore, all descriptions, interpretation and logical approach comes from the original course and all I did is to write the R code.* 
@@ -762,3 +762,10 @@ stargazer(lm5, lm6, type="text")
 Does our regression output agree with the graph in question 4? What are the ‘slope’ coefficients of the two regressions? How do they compare to one another?
 
 The age coefficients of the regressions clearly show that BMI increases with age substantially faster for women than for men between the ages of 20 and 40.
+
+
+#### Information about this seesion
+
+```{r}
+sessionInfo()
+```
