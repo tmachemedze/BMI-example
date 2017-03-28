@@ -3,9 +3,9 @@ title: "The BMI example"
 author: "Takwanisa Machemedze"
 date: "24 March 2017"
 output:
-  pdf_document: default
   md_document: default
   html_document: default
+  pdf_document: default
 ---
 
 **Note:** *This exercise is part of re-writing the [SALDRU Stata course](http://www.saldru.uct.ac.za/courses/) in R for [DataFirst](https://www.datafirst.uct.ac.za/).Therefore, all descriptions, interpretation and logical approach comes from the original course and all I did is to write the R code.* 
