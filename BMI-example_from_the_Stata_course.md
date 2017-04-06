@@ -1359,7 +1359,7 @@ The age coefficients of the regressions clearly show that BMI increases
 with age substantially faster for women than for men between the ages of
 20 and 40.
 
-#### Information about this seesion
+#### Information about this session
 
     sessionInfo()
 
