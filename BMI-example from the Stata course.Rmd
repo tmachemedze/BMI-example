@@ -3,8 +3,8 @@ title: "The BMI example"
 author: "Takwanisa Machemedze"
 date: "24 March 2017"
 output:
-  md_document: default
   html_document: default
+  md_document: default
   pdf_document: default
 ---
 
