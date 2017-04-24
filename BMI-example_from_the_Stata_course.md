@@ -516,7 +516,7 @@ or between rural and urban areas?**
       mutate(freq = n/sum(n)*100)%>%
       ggplot(., aes(x = bmi_bins, y = freq)) + 
       geom_bar(stat = "identity", width=.3) + 
-      theme_minimal() +
+      theme_bw() +
       geom_text(aes(label=round(freq,1)), vjust=-0.2) +
       xlab("BMI bins") + ylab("Percent")
 
@@ -529,7 +529,7 @@ Or
       ggplot(., aes(bmi_bins)) +
       geom_bar(aes(y = (..count..)/sum(..count..)), width=.3) +
       scale_y_continuous(labels=scales::percent) + 
-      theme_minimal() +
+      theme_bw() +
       xlab("BMI bins") + ylab("Percent")
 
 ![](BMI-example_from_the_Stata_course_files/figure-markdown_strict/unnamed-chunk-33-1.png)
@@ -542,7 +542,7 @@ Or
         geom_bar(aes(y = ..prop..), stat="count") +
         geom_text(aes( label = scales::percent(..prop..),
                        y= ..prop.. ), stat= "count", vjust = -.5) +
-        theme_minimal() +
+        theme_bw() +
         labs(y = "Percent") +
         facet_grid(~gender) +
         scale_y_continuous(labels = scales::percent) 
@@ -560,7 +560,7 @@ Or
         labs(y = "Percent") +
         facet_wrap(~geotype, ncol = 2) +
         scale_y_continuous(labels = scales::percent) + 
-      theme_minimal()
+      theme_bw()
 
 ![](BMI-example_from_the_Stata_course_files/figure-markdown_strict/unnamed-chunk-35-1.png)
 
@@ -639,7 +639,7 @@ across racial groups.
       ggplot(., aes(x=age_adult)) +
        geom_histogram( aes(y = ..density..), binwidth = 1) +
        facet_wrap(~race) + 
-      theme_minimal() +
+      theme_bw() +
        xlab("Age in years - adults") + ylab("Density")
 
     ## Warning: Removed 11605 rows containing non-finite values (stat_bin).
@@ -777,7 +777,7 @@ summarize the relationship between them using a scatter graph.
 
     ggplot(nids, aes(hh.pcinc, bmi)) +
       geom_point() + 
-      theme_minimal() +
+      theme_bw() +
       ggtitle("Scatterplot of BMI and pc hh_income") +
       ylab("Respondent's Body Mass Index")
 
@@ -805,7 +805,7 @@ suggested and adding a trend line.
 
     ggplot(nids[nids$bmi_valid == 1 & nids$hh.pcinc <= 14000,], aes(hh.pcinc, bmi)) +
       geom_point() + 
-      theme_minimal() +
+      theme_bw() +
       stat_smooth(method = "lm", size=1, formula = y ~ x, se = FALSE)
 
     ## Warning: Removed 20386 rows containing non-finite values (stat_smooth).
@@ -832,7 +832,7 @@ consideration.
       ggplot(., aes(hh.pcinc, bmi, color = gender)) +
       geom_point() + 
       stat_smooth(method = "lm", size=1, formula = y ~ x, se = FALSE) + 
-      theme_minimal() +
+      theme_bw() +
       ggtitle("Comparing BMI and income (by gender)") +
       ylab("BMI")
 
@@ -898,7 +898,7 @@ restrict our sample to females only.
       geom_point() +
       stat_smooth(method = "lm", formula = y ~ x, se = FALSE, colour = "blue", aes(colour = "linear")) +
       stat_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, colour = "red") + 
-      theme_minimal() +
+      theme_bw() +
       ggtitle("Comparing BMI and income(for women)")
 
 ![](BMI-example_from_the_Stata_course_files/figure-markdown_strict/unnamed-chunk-52-1.png)
@@ -959,11 +959,11 @@ different values of BMI and age.
 
     ggplot(corr2.df, aes(x = age_adult, y = bmi)) +
       geom_point(aes(x = age_adult, y = bmi)) +
-      stat_smooth(method = "lm", formula = y ~ x, se = FALSE, colour = "red") + 
-      stat_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, colour = "green") +
+      stat_smooth(method = "lm", formula = y ~ x, se = FALSE, colour = "blue") + 
+      stat_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, colour = "red") +
       scale_x_continuous(breaks=seq(20,100,20)) +
       scale_y_continuous(breaks=seq(10,50,10)) + 
-      theme_minimal() +
+      theme_bw() +
       xlab("Age in years - adults") + ylab("BMI") +
       ggtitle("Scatter plot of BMI and age")
 
@@ -1022,7 +1022,7 @@ age.
 
     ggplot(bmi_age_df, aes(x = age_adult, y = bmi_age)) +
       geom_point(aes(x = age_adult, y = bmi_age), colour="blue") +
-      theme_minimal() +
+      theme_bw() +
       xlab("Age") + ylab("Mean BMI (by age_adult)") +
       ggtitle("Mean BMI by Age")
 
@@ -1302,7 +1302,7 @@ First plot for all:
       summarise(bmi_age_gender = mean(bmi, na.rm = T)) %>%
       ggplot(., aes(x = age_adult, y = bmi_age_gender, color = gender)) +
       geom_point(aes(x = age_adult, y = bmi_age_gender)) +
-      theme_minimal() +
+      theme_bw() +
       xlab("Age") + ylab("Mean BMI (by age_adult)") +
       ggtitle("Mean BMI by Age")
 
@@ -1327,7 +1327,7 @@ Plotting
 
     ggplot(bmiage, aes(x = age_adult, y = bmi_age_gen, group = gender, color = gender)) +
       geom_point() + stat_smooth(method = "lm", formula = y ~ x, se = FALSE) +
-      theme_minimal() +
+      theme_bw() +
       xlab("Age in years - adults") + ylab("BMI") + ggtitle("Comparing mean BMI by age & gender groupings")
 
 ![](BMI-example_from_the_Stata_course_files/figure-markdown_strict/unnamed-chunk-72-1.png)
