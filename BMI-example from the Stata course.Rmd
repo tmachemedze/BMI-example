@@ -3,8 +3,8 @@ title: "The BMI example"
 author: "Takwanisa Machemedze"
 date: "24 March 2017"
 output:
-  html_document: default
   md_document: default
+  html_document: default
   pdf_document: default
 ---
 
@@ -35,6 +35,9 @@ We use a subset of the data with the following variables:
 `w1_a_n2_1`	- "Weight measure one"
 
 `w1_best_race` - "Best race"
+
+`w1_quest_typ` "Questionnaire type (adult, child, proxy)"
+
 
 # Worked example 1: Investigating BMI in South Africa
 
@@ -323,7 +326,8 @@ nids%>%
   count(bmi_bins)%>%
   mutate(freq = n/sum(n)*100)%>%
   ggplot(., aes(x = bmi_bins, y = freq)) + 
-  geom_bar(stat = "identity", width=.3) +
+  geom_bar(stat = "identity", width=.3) + 
+  theme_minimal() +
   geom_text(aes(label=round(freq,1)), vjust=-0.2) +
   xlab("BMI bins") + ylab("Percent")
 ```
@@ -335,7 +339,8 @@ nids%>%
   filter(!is.na(bmi_bins))%>%
   ggplot(., aes(bmi_bins)) +
   geom_bar(aes(y = (..count..)/sum(..count..)), width=.3) +
-  scale_y_continuous(labels=scales::percent) +
+  scale_y_continuous(labels=scales::percent) + 
+  theme_minimal() +
   xlab("BMI bins") + ylab("Percent")
 ```    
     
@@ -349,9 +354,10 @@ nids%>%
     geom_bar(aes(y = ..prop..), stat="count") +
     geom_text(aes( label = scales::percent(..prop..),
                    y= ..prop.. ), stat= "count", vjust = -.5) +
+    theme_minimal() +
     labs(y = "Percent") +
     facet_grid(~gender) +
-    scale_y_continuous(labels = scales::percent)
+    scale_y_continuous(labels = scales::percent) 
 ```
 
 **By geotype:**
@@ -365,7 +371,8 @@ nids%>%
                    y= ..prop.. ), stat= "count", vjust = -.5) +
     labs(y = "Percent") +
     facet_wrap(~geotype, ncol = 2) +
-    scale_y_continuous(labels = scales::percent)
+    scale_y_continuous(labels = scales::percent) + 
+  theme_minimal()
 ```
 
 
@@ -402,7 +409,8 @@ nids%>%
   filter(!is.na(race))%>%
   ggplot(., aes(x=age_adult)) +
    geom_histogram( aes(y = ..density..), binwidth = 1) +
-   facet_wrap(~race) +
+   facet_wrap(~race) + 
+  theme_minimal() +
    xlab("Age in years - adults") + ylab("Density")
 ```   
 
@@ -473,7 +481,8 @@ Since BMI and income are both continuous variables it is easiest to summarize th
 
 ```{r}
 ggplot(nids, aes(hh.pcinc, bmi)) +
-  geom_point() +
+  geom_point() + 
+  theme_minimal() +
   ggtitle("Scatterplot of BMI and pc hh_income") +
   ylab("Respondent's Body Mass Index")
 ```
@@ -487,6 +496,7 @@ Redraw the scatterplot restricting the range of BMI and income as suggested and 
 ```{r}
 ggplot(nids[nids$bmi_valid == 1 & nids$hh.pcinc <= 14000,], aes(hh.pcinc, bmi)) +
   geom_point() + 
+  theme_minimal() +
   stat_smooth(method = "lm", size=1, formula = y ~ x, se = FALSE)
 ```
 
@@ -501,7 +511,8 @@ nids%>%
   filter(bmi_valid == 1 & hh.pcinc <= 14000 & !is.na(gender))%>%
   ggplot(., aes(hh.pcinc, bmi, color = gender)) +
   geom_point() + 
-  stat_smooth(method = "lm", size=1, formula = y ~ x, se = FALSE) +
+  stat_smooth(method = "lm", size=1, formula = y ~ x, se = FALSE) + 
+  theme_minimal() +
   ggtitle("Comparing BMI and income (by gender)") +
   ylab("BMI")
 ```  
@@ -545,7 +556,8 @@ nids%>%
   ggplot(., aes(x = hh.pcinc, y = bmi)) +
   geom_point() +
   stat_smooth(method = "lm", formula = y ~ x, se = FALSE, colour = "blue", aes(colour = "linear")) +
-  stat_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, colour = "red") +
+  stat_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, colour = "red") + 
+  theme_minimal() +
   ggtitle("Comparing BMI and income(for women)")
 ```
 
@@ -577,11 +589,12 @@ A simple scatterplot gives us the relationship between BMI and age over differen
 
 ```{r message = F, warning = F}
 ggplot(corr2.df, aes(x = age_adult, y = bmi)) +
-  geom_point(aes(x = age_adult, y = bmi), colour = "blue") +
+  geom_point(aes(x = age_adult, y = bmi)) +
   stat_smooth(method = "lm", formula = y ~ x, se = FALSE, colour = "red") + 
   stat_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, colour = "green") +
   scale_x_continuous(breaks=seq(20,100,20)) +
-  scale_y_continuous(breaks=seq(10,50,10)) +
+  scale_y_continuous(breaks=seq(10,50,10)) + 
+  theme_minimal() +
   xlab("Age in years - adults") + ylab("BMI") +
   ggtitle("Scatter plot of BMI and age")
 ```
@@ -608,6 +621,7 @@ We can investigate this by plotting the mean bmi by age variable against age.
 ```{r}
 ggplot(bmi_age_df, aes(x = age_adult, y = bmi_age)) +
   geom_point(aes(x = age_adult, y = bmi_age), colour="blue") +
+  theme_minimal() +
   xlab("Age") + ylab("Mean BMI (by age_adult)") +
   ggtitle("Mean BMI by Age")
 ```
@@ -714,6 +728,7 @@ nids%>%
   summarise(bmi_age_gender = mean(bmi, na.rm = T)) %>%
   ggplot(., aes(x = age_adult, y = bmi_age_gender, color = gender)) +
   geom_point(aes(x = age_adult, y = bmi_age_gender)) +
+  theme_minimal() +
   xlab("Age") + ylab("Mean BMI (by age_adult)") +
   ggtitle("Mean BMI by Age")
 ``` 
@@ -742,6 +757,7 @@ Plotting
 ```{r}
 ggplot(bmiage, aes(x = age_adult, y = bmi_age_gen, group = gender, color = gender)) +
   geom_point() + stat_smooth(method = "lm", formula = y ~ x, se = FALSE) +
+  theme_minimal() +
   xlab("Age in years - adults") + ylab("BMI") + ggtitle("Comparing mean BMI by age & gender groupings")
 ```
 
