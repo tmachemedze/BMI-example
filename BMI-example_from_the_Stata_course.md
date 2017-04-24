@@ -518,6 +518,7 @@ or between rural and urban areas?**
       geom_bar(stat = "identity", width=.3) + 
       theme_bw() +
       geom_text(aes(label=round(freq,1)), vjust=-0.2) +
+      ggtitle("add title") +
       xlab("BMI bins") + ylab("Percent")
 
 ![](BMI-example_from_the_Stata_course_files/figure-markdown_strict/unnamed-chunk-32-1.png)
@@ -530,7 +531,7 @@ Or
       geom_bar(aes(y = (..count..)/sum(..count..)), width=.3) +
       scale_y_continuous(labels=scales::percent) + 
       theme_bw() +
-      xlab("BMI bins") + ylab("Percent")
+      ggtitle("add title") + xlab("BMI bins") + ylab("Percent")
 
 ![](BMI-example_from_the_Stata_course_files/figure-markdown_strict/unnamed-chunk-33-1.png)
 
@@ -542,7 +543,8 @@ Or
         geom_bar(aes(y = ..prop..), stat="count") +
         geom_text(aes( label = scales::percent(..prop..),
                        y= ..prop.. ), stat= "count", vjust = -.5) +
-        theme_bw() +
+        theme_bw()  +
+        ggtitle("add title") +
         labs(y = "Percent") +
         facet_grid(~gender) +
         scale_y_continuous(labels = scales::percent) 
@@ -558,9 +560,10 @@ Or
         geom_text(aes( label = scales::percent(..prop..),
                        y= ..prop.. ), stat= "count", vjust = -.5) +
         labs(y = "Percent") +
+        ggtitle("add title") +
         facet_wrap(~geotype, ncol = 2) +
         scale_y_continuous(labels = scales::percent) + 
-      theme_bw()
+      theme_bw() 
 
 ![](BMI-example_from_the_Stata_course_files/figure-markdown_strict/unnamed-chunk-35-1.png)
 
@@ -639,8 +642,8 @@ across racial groups.
       ggplot(., aes(x=age_adult)) +
        geom_histogram( aes(y = ..density..), binwidth = 1) +
        facet_wrap(~race) + 
-      theme_bw() +
-       xlab("Age in years - adults") + ylab("Density")
+      theme_bw()  +
+       ggtitle("add title") + xlab("Age in years - adults") + ylab("Density")
 
     ## Warning: Removed 11605 rows containing non-finite values (stat_bin).
 

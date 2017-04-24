@@ -329,6 +329,7 @@ nids%>%
   geom_bar(stat = "identity", width=.3) + 
   theme_bw() +
   geom_text(aes(label=round(freq,1)), vjust=-0.2) +
+  ggtitle("add title") +
   xlab("BMI bins") + ylab("Percent")
 ```
 
@@ -341,7 +342,7 @@ nids%>%
   geom_bar(aes(y = (..count..)/sum(..count..)), width=.3) +
   scale_y_continuous(labels=scales::percent) + 
   theme_bw() +
-  xlab("BMI bins") + ylab("Percent")
+  ggtitle("add title") + xlab("BMI bins") + ylab("Percent")
 ```    
     
 
@@ -354,11 +355,13 @@ nids%>%
     geom_bar(aes(y = ..prop..), stat="count") +
     geom_text(aes( label = scales::percent(..prop..),
                    y= ..prop.. ), stat= "count", vjust = -.5) +
-    theme_bw() +
+    theme_bw()  +
+    ggtitle("add title") +
     labs(y = "Percent") +
     facet_grid(~gender) +
     scale_y_continuous(labels = scales::percent) 
 ```
+
 
 **By geotype:**
 
@@ -370,9 +373,10 @@ nids%>%
     geom_text(aes( label = scales::percent(..prop..),
                    y= ..prop.. ), stat= "count", vjust = -.5) +
     labs(y = "Percent") +
+    ggtitle("add title") +
     facet_wrap(~geotype, ncol = 2) +
     scale_y_continuous(labels = scales::percent) + 
-  theme_bw()
+  theme_bw() 
 ```
 
 
@@ -410,8 +414,8 @@ nids%>%
   ggplot(., aes(x=age_adult)) +
    geom_histogram( aes(y = ..density..), binwidth = 1) +
    facet_wrap(~race) + 
-  theme_bw() +
-   xlab("Age in years - adults") + ylab("Density")
+  theme_bw()  +
+   ggtitle("add title") + xlab("Age in years - adults") + ylab("Density")
 ```   
 
 There are differences in the age profiles across racial groups. The African and Coloured groups are weighted quite heavily towards younger adults, while the White group appears to have a more equal number of people across all ages.
